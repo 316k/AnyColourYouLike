@@ -8,7 +8,7 @@ public class KNNColorClassifier extends ColorClassifier {
     /**
      * Hyperparamètre : combien de voisins considérer
      */
-    private final int k = 1;
+    private final int k = 18;
     
     private ArrayList<ColorLabel> colors; 
     
@@ -68,11 +68,14 @@ public class KNNColorClassifier extends ColorClassifier {
             }
         }
         
-        String[] names = new String[closest.length];
-        Float[] distance = new Float[closest.length];
+        String[] names = new String[number_added];
+        Float[] distance = new Float[number_added];
         
         int i = 0;
         for(ColorLabel c : closest) {
+            if(c == null) {
+                break;
+            }
             names[i] = c.name;
             distance[i] = (float) c.compareTo(unknown);
             i++;

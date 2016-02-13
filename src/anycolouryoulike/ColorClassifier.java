@@ -3,6 +3,7 @@ package anycolouryoulike;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javafx.util.Pair;
 
 public abstract class ColorClassifier {
     
@@ -37,12 +38,20 @@ public abstract class ColorClassifier {
     
     
     public static String weightedMajorityVote(String[] arr, Float[] w) {
-        HashMap<String, Float> occurences = new HashMap<>();
-                
+        HashMap<String, Float[]> occurences = new HashMap<>();
+        
         int i = 0;
         for(String name : arr) {
-            float weight = occurences.getOrDefault(name, 0f);
-            occurences.put(name, w.length/w[i] + weight);
+            Float[] occurence = occurences.get(name);
+            
+            if(occurence == null) {
+                occurence = new Float[]{0f, 0f};
+            }
+            
+            occurence[0] += 1/(w[i] + 1);
+            occurence[1]++;
+            
+            occurences.put(name, occurence);
             i++;
         }
         
@@ -50,13 +59,17 @@ public abstract class ColorClassifier {
         float max = 0;
          
         for(String key : occurences.keySet()) {
-            if(occurences.get(key) > max) {
-                max = occurences.get(key);
+            Float[] occurence = occurences.get(key);
+            
+            float score = occurence[1] * occurence[0];
+            
+            if(score > max) {
+                System.out.println("\n" + key + " : " + score);
+                max = score;
                 name = key;
             }
-            System.out.println(key + " : " + occurences.get(key).toString());
         }
-        
+        System.out.println("---------------");
         return name;
     }
     

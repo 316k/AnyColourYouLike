@@ -24,9 +24,9 @@ public class Window extends JFrame {
     private JLabel label;
     private ColorPicker picker;
 
-    public Window() {
+    public Window(ColorClassifier colorDetector) {
         
-        colorDetector = new SimpleColorClassifier();
+        this.colorDetector = colorDetector;
         
         this.setTitle("Any Colour You Like");
         this.setSize(new Dimension(600, 480));

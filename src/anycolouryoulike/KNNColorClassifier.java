@@ -8,16 +8,16 @@ public class KNNColorClassifier extends ColorClassifier {
     /**
      * Hyperparamètre : combien de voisins considérer
      */
-    private final int k = 10;
+    private final int k = 1;
     
     private ArrayList<ColorLabel> colors; 
     
-    public KNNColorClassifier() {
+    public KNNColorClassifier(ColorLabel[] colors) {
         
-        colors = new ArrayList<>();
+        this.colors = new ArrayList<>();
         
         // Classification des couleurs connues
-        for(ColorLabel color : this.knownColors) {
+        for(ColorLabel color : colors) {
             this.add(color.r, color.g, color.b, color.name);
         }
     }
@@ -68,16 +68,16 @@ public class KNNColorClassifier extends ColorClassifier {
             }
         }
         
-        ArrayList<String> names = new ArrayList<>();
+        String[] names = new String[closest.length];
+        Float[] distance = new Float[closest.length];
         
-        for(ColorLabel color : closest) {
-            if(color == null) {
-                break;
-            }
-            
-            names.add(color.name);
+        int i = 0;
+        for(ColorLabel c : closest) {
+            names[i] = c.name;
+            distance[i] = (float) c.compareTo(unknown);
+            i++;
         }
         
-        return ColorClassifier.majority(names);
+        return ColorClassifier.weightedMajorityVote(names, distance);
     }
 }

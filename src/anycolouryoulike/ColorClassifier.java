@@ -1,21 +1,11 @@
 package anycolouryoulike;
 
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class ColorClassifier {
     
-    /**
-     * Ensemble de couleurs de départ
-     */
-    protected ColorLabel[] knownColors = new ColorLabel[]{
-        new ColorLabel(0, 0, 0, "noir"),
-        new ColorLabel(255, 255, 255, "blanc"),
-        new ColorLabel(255, 0, 0, "rouge"),
-        new ColorLabel(0, 255, 0, "vert"),
-        new ColorLabel(0, 0, 255, "bleu"),
-    };
-
     public abstract void add(int r, int g, int b, String name);
     
     // Présenté en classe
@@ -24,7 +14,7 @@ public abstract class ColorClassifier {
      * @param arr
      * @return 
      */
-    public static String majority(ArrayList<String> arr) {
+    public static String majorityVote(ArrayList<String> arr) {
         HashMap<String, Integer> occurences = new HashMap<>();
         
         for(String name : arr) {
@@ -40,6 +30,31 @@ public abstract class ColorClassifier {
                 max = occurences.get(key);
                 name = key;
             }
+        }
+        
+        return name;
+    }
+    
+    
+    public static String weightedMajorityVote(String[] arr, Float[] w) {
+        HashMap<String, Float> occurences = new HashMap<>();
+                
+        int i = 0;
+        for(String name : arr) {
+            float weight = occurences.getOrDefault(name, 0f);
+            occurences.put(name, w.length/w[i] + weight);
+            i++;
+        }
+        
+        String name = "?";
+        float max = 0;
+         
+        for(String key : occurences.keySet()) {
+            if(occurences.get(key) > max) {
+                max = occurences.get(key);
+                name = key;
+            }
+            System.out.println(key + " : " + occurences.get(key).toString());
         }
         
         return name;

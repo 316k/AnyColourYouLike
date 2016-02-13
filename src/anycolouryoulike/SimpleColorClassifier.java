@@ -14,7 +14,7 @@ public class SimpleColorClassifier extends ColorClassifier {
      */
     private final int sections = 2;
     
-    public SimpleColorClassifier() {
+    public SimpleColorClassifier(ColorLabel[] colors) {
         
         this.cube = new ArrayList[sections][sections][sections];
         
@@ -27,7 +27,7 @@ public class SimpleColorClassifier extends ColorClassifier {
         }
         
         // Classification des couleurs connues
-        for(ColorLabel color : this.knownColors) {
+        for(ColorLabel color : colors) {
             this.add(color.r, color.g, color.b, color.name);
         }
     }
@@ -52,7 +52,7 @@ public class SimpleColorClassifier extends ColorClassifier {
      */
     public String colorName(int r, int g, int b) {
         
-        return ColorClassifier.majority(this.cube[classify(r)][classify(g)][classify(b)]);
+        return ColorClassifier.majorityVote(this.cube[classify(r)][classify(g)][classify(b)]);
     }
     
 }

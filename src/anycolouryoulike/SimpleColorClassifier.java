@@ -12,10 +12,16 @@ public class SimpleColorClassifier extends ColorClassifier {
     /**
      * Hyperparamètre : en combien de sections est divisée chaque dimension du cube
      */
-    private final int sections = 2;
-    
-    public SimpleColorClassifier(ColorLabel[] colors) {
+    private int sections = 2;
+
+    /**
+     * 
+     * @param colors
+     * @param sections 
+     */
+    public SimpleColorClassifier(ColorLabel[] colors, int sections) {
         
+        this.sections = sections;
         this.cube = new ArrayList[sections][sections][sections];
         
         for(int i = 0; i < sections; i++) {

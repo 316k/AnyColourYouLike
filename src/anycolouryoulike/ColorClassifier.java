@@ -64,7 +64,7 @@ public abstract class ColorClassifier {
             float score = occurence[1] * occurence[0];
             
             if(score > max) {
-                System.out.println("\n" + key + " : " + score);
+                System.out.println(key + " : " + score);
                 max = score;
                 name = key;
             }

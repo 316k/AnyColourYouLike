@@ -8,12 +8,13 @@ public class KNNColorClassifier extends ColorClassifier {
     /**
      * Hyperparamètre : combien de voisins considérer
      */
-    private final int k = 18;
+    private int k = 18;
     
     private ArrayList<ColorLabel> colors; 
     
-    public KNNColorClassifier(ColorLabel[] colors) {
+    public KNNColorClassifier(ColorLabel[] colors, int k) {
         
+        this.k = k;
         this.colors = new ArrayList<>();
         
         // Classification des couleurs connues

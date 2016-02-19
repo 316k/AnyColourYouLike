@@ -1,9 +1,7 @@
 package anycolouryoulike;
 
-import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javafx.util.Pair;
 
 public abstract class ColorClassifier {
     

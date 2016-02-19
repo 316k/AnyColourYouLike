@@ -19,18 +19,18 @@ public class ColorLabel implements Comparable<ColorLabel> {
      * Fonction de comparaison à une autre couleur. Retourne la distance
      * pythagorienne des deux couleurs.
      * 
-     * @param o
+     * @param other
      * @return 
      */
     @Override
-    public int compareTo(ColorLabel o) {
+    public int compareTo(ColorLabel other) {
         
         // Distance de deux vecteurs : pythagore en 3D
         // 0,0 à 10,20 : sqrt((10 - 0)² + (20 - 0)²)
         // 0,0,0 à 5,5,5 : 
         
-        return (int) Math.sqrt(Math.pow(o.r - this.r, 2) +
-                Math.pow(o.g - this.g, 2) +
-                Math.pow(o.b - this.b, 2));
+        return (int) Math.sqrt(Math.pow(other.r - this.r, 2) +
+                Math.pow(other.g - this.g, 2) +
+                Math.pow(other.b - this.b, 2));
     }
 }

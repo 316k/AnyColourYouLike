@@ -8,7 +8,7 @@ public class KNNColorClassifier extends ColorClassifier {
     /**
      * Hyperparamètre : combien de voisins considérer
      */
-    private int k = 18;
+    private int k;
     
     private ArrayList<ColorLabel> colors; 
     

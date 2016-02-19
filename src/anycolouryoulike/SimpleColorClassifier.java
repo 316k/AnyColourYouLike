@@ -7,12 +7,12 @@ public class SimpleColorClassifier extends ColorClassifier {
     /**
      * "Cube" de ArrayList de Strings
      */
-    private ArrayList[][][] cube;
+    private ArrayList<String>[][][] cube;
     
     /**
      * Hyperparamètre : en combien de sections est divisée chaque dimension du cube
      */
-    private int sections = 2;
+    private int sections;
 
     /**
      * 
@@ -27,7 +27,7 @@ public class SimpleColorClassifier extends ColorClassifier {
         for(int i = 0; i < sections; i++) {
             for(int j = 0; j < sections; j++) {
                 for(int k = 0; k < sections; k++) {
-                    this.cube[i][j][k] = new ArrayList<String>();
+                    this.cube[i][j][k] = new ArrayList<>();
                 }
             }
         }

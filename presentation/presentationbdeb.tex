@@ -1,0 +1,455 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass[french]{beamer}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+
+\newcommand{\handout}[5]{
+  \noindent
+  \begin{center}
+  \framebox{ \vbox{ \hbox to 5.78in { {\bf IFT2125 -- Introduction à
+          l'algorithmique } \hfill #2 }
+      \vspace{4mm}
+      \hbox to 5.78in { {\Large \hfill #5  \hfill} }
+      \vspace{2mm}
+      \hbox to 5.78in { {\hfill \em #3 \hfill} }
+    }
+  }
+  \end{center}
+  \vspace*{4mm}
+}
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Intro-ML]{Briève introduction à l'apprentissage machine} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{Nicolas Hurtubise \\
+Vincent Antaki} % Your name
+\institute[UdeM] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+*Ou introduction aux modèles d'apprentissages non-paramétrés \\ % Your institution for the title page
+\medskip
+\textit{hurtubin@iro.umontreal.ca
+\\antakivi@iro.umontreal.ca} % Your email address
+}
+\date{} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{L'apprentissage machine ?}
+
+Selon \textbf{\href{http://www.iro.umontreal.ca/~aimeur/cours/ift6261/Survol_apprentissage_machine.pdf}{Sébastien
+Gambs}}
+
+\begin{quote}
+L'apprentissage machine étudie les techniques permettant de donner à la machine la capacitée d'apprendre à partir d'expériences passées
+\end{quote}
+\begin{center}\rule{3in}{0.4pt}\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quel rapport avec l'UdeM ?}
+
+{Laboratoire d'informatique des systèmes adaptatifs
+(MILA)}
+
+\begin{quote}
+\textbf{Yoshua Bengio}
+
+\begin{quote}
+Professeur au DIRO, pionnier du deep learning
+\end{quote}
+\end{quote}
+
+\begin{center}\rule{3in}{0.4pt}\end{center}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Grosso-modo c'est quoi?}
+
+\begin{quote}
+Champ d'étude de l'intelligence artificielle visant à apprendre à partir d'exemples les paramètres d'un modèle en vue d'accomplir une tâche.
+\end{quote}
+\end{frame}
+
+\begin{frame}
+\frametitle{Un modèle?}
+\begin{itemize}
+\item Le modèle est la partie la plus importante de tout algorithme d'apprentissage. Un modèle définit une fonction de décision ainsi que ses paramètres à apprendre. Cette fonction possède généralement des .
+
+\item Ex. : Une ligne peut servir à classifier un ensemble en 2 sections. 
+
+	f(x): ax + b
+
+Par exemple, nous avons la position et l'équipe des joueurs sur un terrain de ballon-chasseur. 
+
+\end{itemize}
+
+\begin{center}
+Mettre image ici
+\end{center}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Les hyper-paramètres}
+
+\begin{itemize}
+\item La capacité d'un modèle est déterminée par sa configuration (que l'on nomme hyper-paramètres)
+
+\item Ex. Un polynôme de degré $k$ à la place d'une ligne.
+\end{itemize}
+
+\begin{tabular}{ccc}
+Degré (hyper-p.) & Fonction de décision & Paramètres à apprendre \\
+$0$	& $f(x) = a$ & $a$ \\
+$1$ & $f(x) = ax+b$ & $a,b$ \\
+$2$ & $f(x) = ax^2 + bx + c$ & $a,b,c$ \\
+etc..& &
+\end{tabular}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Problème général : classifier une donnée selon ses
+caractéristiques}
+
+SUGGESTIONS D<EXEMPLE ALTERNATIF : Nombre d'heures de sommeils | Nombre d'heures de travail | Nombre d'heures passer Ã  faire la fÃªte | Occupation 
+
+\begin{center}
+\begin{tabular}{rcrc}
+& Alcool & Pourcentage & Type\\
+1 & Bière blonde & 5\% & Faible
+\\
+2 & Bière brune & 9\% & Faible
+\\
+3 & Vin & 12\% & Faible
+\\
+4 & Vodka & 40\% & Fort
+\\
+5 & Gin & 47\% & Fort
+\\
+6 & Rhum & 55\% & Fort
+\\
+7 & \emph{Curaçao Bleu} & 25\% & ?
+\\
+8 & \emph{Whisky} & 72\% & ?
+\\
+\end{tabular}
+\end{center}
+
+\begin{center}\rule{3in}{0.4pt}\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Qu'est-ce qu'on fait ici?}
+
+\begin{itemize}
+\item Nous allons vous montrer deux techniques de modÃšle non-paramÃ©trÃ©s (non-paramÃ©trÃ©s : les techniques n'apprennent pas Ã  proprement parler de paramÃštres, elles ne font que garder en mÃ©moire tous les exemples et calcule une rÃ©ponse directement en fonction de ceux-ci)
+\item Nous allons ici tenter de classifier des couleurs en fonction de millions de données récoltés par sondage internet. 
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Problème : Apprendre à nommer des
+couleurs}
+
+On cherche un algorithme qui peut nous donner le nom d'une couleur selon
+sa valeur \texttt{rgb}
+
+{Exemples}
+
+\begin{verbatim}
+    rgb(255, 0, 0) -> Rouge
+    rgb(0, 255, 0) -> Vert
+    rgb(0, 0, 255) -> Bleu
+    rgb(0, 0, 0) -> Noir
+    rgb(255, 255, 255) -> Blanc
+    rgb(200, 80, 180) -> ?
+\end{verbatim}
+
+\begin{center}\rule{3in}{0.4pt}\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Données : xkcd's color dataset}
+Le webcomic xkcd a récolté plus de XXXX échantillons de couleur étiquetée par des utilisateurs du web
+
+Certains sont un peu abberants. Nous avons préalablement retirés toutes les  couleurs de plus de YYYY caractères.
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Approche de l'histogramme : Séparer en catégories et trouver la tendance dans chaque catégorie}
+
+{Séparer en 5 sur l'échelle de 0 à
+100}
+
+\begin{verbatim}
+     123    7?  4  56    8?
+    *-------^------------^--------*
+    0                             100
+
+       A     B     C     D     E
+    *-----*-----*-----*-----*-----*
+    0     20    40    60    80    100
+\end{verbatim}
+
+{Catégories}
+
+\begin{verbatim}
+A: Faible ; B: Fort ; C: Fort ; D: (vide) ; E: (vide)
+7 est donc Fort, 8 est ?
+\end{verbatim}
+\begin{center}\rule{3in}{0.4pt}\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Approche : Séparer en catégories et trouver la tendance dans
+chaque
+catégorie}
+
+{Séparer en 3 sur l'échelle de 0 à
+100}
+
+\begin{verbatim}
+     123    7   4  56    8 
+    *-------^------------^--------*
+    0                            100
+    
+        A          B         C
+    *--------*----------*---------*
+    0     20    40    60    80    100
+\end{verbatim}
+\begin{center}\rule{3in}{0.4pt}\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Approche : Séparer en catégories et trouver la tendance dans
+chaque
+catégorie}
+
+{Séparer en 3 sur l'échelle de 0 à
+100}
+
+\begin{verbatim}
+     123    7   4  56    8 
+    *-------^------------^--------*
+    0                            100
+    
+        A          B         C
+    *--------*----------*---------*
+    0     20    40    60    80    100
+\end{verbatim}
+
+{Catégories}
+
+\begin{verbatim}
+A: Faible ; B: Fort ; C: Aucune donnée
+7 est donc faible, 8 est ?
+\end{verbatim}
+\begin{center}\rule{3in}{0.4pt}\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Approche : Séparer en catégories et trouver la tendance dans
+chaque
+catégorie}
+
+{Avantages}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Très simple, semble suffisant dans certains cas
+\end{itemize}
+
+{Problèmes}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Certaines catégories peuvent être vides
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    Impossible de donner une réponse dans certains cas
+  \end{itemize}
+\item
+  Il faut trouver le nombre idéal de catégories
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    Pas assez de catégories ne donne pas une idée assez précise
+  \item
+    Trop de catégories risque de donner beaucoup de cas où on ne sait
+    pas répondre
+  \end{itemize}
+\end{itemize}
+\begin{center}\rule{3in}{0.4pt}\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Autre approche : Les $k$ plus proches voisins}
+Trouver les $k$ éléments les plus "proches" à ce qu'on cherche à identifier et déduire une catégorie en fonction de ces éléments (et potentiellement de leur distance)
+\includegraphics{KnnClassification.png}\{ width=30\% \}
+\end{frame}
+
+\begin{frame}
+\frametitle{Autre approche : Les $k$ plus proches voisins}
+
+\begin{itemize}
+
+\item{Nécessite une définition de la distance entre 2 couleurs (distance euclidienne en 3 dimension dans notre cas)}
+
+Pour $a$ et $b$, deux tableaux de nombre de taille 3, la distance se définit comme suit :
+$$ d(a,b) = \sqrt{(a_1-b_1)^2+(a_2-b_2)^2+(a_3-b_3)^2}$$
+
+\item{Nécessite une fonction de score. La catégorie choisie sera celle avec le plus haut score.}
+\end{itemize}
+
+Les voisins : $((x_1,y_1),(x_2,y_2),...,(x_k,y_k))$ (x la position, y la couleur)
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Fonctions de scores}
+Plusieurs variantes existent :
+\begin{itemize}
+\item{Vote majoritaire des k plus proches voisins}\\
+Score(Couleur) = Compte des couleurs de cette catégorie
+
+\item{Vote pondéré des k plus proches voisins}\\
+Score(Couleur,position) = Sommes de $\frac{1}{dist(x_i,p)}$ pour tous les $x_i$ tel que $y_i$ est la couleur demandée
+
+$$\text{score}(c, p) = \sum_{i=1}^k I_{c=y_i} \cdot \frac{1}{d_(x_i,p)}$$
+
+\item{Votre propre variante}\\
+Inventez vos propres contraintes (e.g. une couleur doit être au moins présente 2 fois dans les $k$ plus proches voisin pour pouvoir voter)
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Contrôle de la capacité}
+Vous vous rappelez des hyper-paramètres? Ceux-ci contrôlent leur capacité à apprendre. 
+
+\begin{itemize}
+\item Histogramme : le nombre de séparations dans chaque dimension
+\item KNN : le nombre de voisins
+\end{itemize}
+
+Mal ajustés, ils peuvent causer des réponses erronées.
+
+\begin{tabular}{lll}
+Sur-apprentissage : & sous-apprentissage & bien ajusté\\
+\includegraphics[scale=100]{mettreoverfittingici}
+&\includegraphics[scale=100]{mettreunderfittingici}
+&\includegraphics[scale=100]{mettreokfittingici}\\
+\end{tabular}
+\end{frame}
+
+
+
+\end{document}

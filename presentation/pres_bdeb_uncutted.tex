@@ -372,7 +372,7 @@ Plusieurs variantes existent :
 
 \pause
 \item{Vote majoritaire des k plus proches voisins}\\
-Score(Couleur) = Compte des couleurs de cette catégorie
+Score(Couleur,position) = Compte des couleurs de cette catégorie parmi les $k$ voisins de la position entrée
 
 \pause
 \item{Vote pondéré par la distance de tous les points}\\
@@ -412,7 +412,7 @@ $$\text{score}(c, p) = \sum_{i=1}^k I_{c=y_i} \cdot \frac{1}{dist{(x_i,p)}}$$
 \begin{frame}
 \frametitle{Contrôle de la capacité}
 Vous vous rappelez des hyper-paramètres? Ceux-ci contrôlent la capacité des modèles à apprendre.
-
+\pause
 \begin{itemize}
 \item Histogramme : le nombre de séparations dans chaque dimension
 \item KNN : le nombre de voisins

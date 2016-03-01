@@ -1,6 +1,6 @@
 # AnyColourYouLike
 
-Vous devez implanter un programme simple qui utilise l'apprentissage machine pour identifier des couleurs par leur nom.
+_**TODO**_ : Vous devez implanter un programme simple qui utilise l'apprentissage machine pour identifier des couleurs par leur nom.
 
 ## Code fourni
 
@@ -22,11 +22,11 @@ ColorClassifier définit les méthodes `add` et `colorName`, que vous devrez imp
 
 Avant de commencer à coder, vous pouvez lancer le programme et vous familiariser avec l'interface. Le Color Picker permet de sélectionner une couleur et de voir son nom en temps réel.
 
-Pour l'instant, ça ne devrait afficher qu'un "?", car les algorithmes n'ont pas été implantées...
+Pour l'instant, ça ne devrait afficher qu'un "?", car les algorithmes n'ont pas été implantés...
 
 Notez le champ d'entrée sous le "?", où vous pourrez ajouter des couleurs arbitraires à l'ensemble de couleurs connues.
 
-Prenez ensuite le temps de lire un peu les classes mentionnées précédement et de les comprendre.
+Prenez ensuite le temps de lire et de comprendre les classes mentionnées précédement.
 
 
 ### 1. Classification par histogramme
@@ -41,7 +41,7 @@ Vous avez (au moins) deux méthodes à implanter dans la classe `SimpleColorClas
     public void add(int r, int g, int b, String name) { ... }
 ```
 
-Se chargera d'ajouter une couleur au `this.cube` dans la bonne section selon les valeurs r,g,b passées en paramètre.
+Cette méthode se chargera d'ajouter une couleur au `this.cube` dans la bonne section selon les valeurs r,g,b passées en paramètre.
 
 Notez que le nombre de sections est une variable, `this.sections` (un `int`).
 
@@ -53,7 +53,7 @@ Notez également que `this.cube[x][y][z]` est un ArrayList de String. On peut do
     public String colorName(int r, int g, int b) { ... }
 ```
 
-Se chargera de donner le nom d'une couleur selon ce qui se trouve dans la section du cube correspondant à (r, g, b).
+Cette méthode se chargera de donner le nom d'une couleur selon ce qui se trouve dans la section du cube correspondant aux paramètres r, g et b.
 
 *Indice* : Le code de classification dans une section donnée de (r, g, b) va se répéter entre `add` et `colorName`, ça peut être une bonne idée d'en faire une méthode de la classe.
 
@@ -86,7 +86,7 @@ Vous trouverez dans la classe `ColorLabel` la fonction :
 
 Qui devra retourner la distance Euclidienne entre deux couleurs.
 
-Rappelez-vous que les couleurs peuvent être vus comme des vecteurs à 3 valeurs (r, g, b), la formule de la distance sera donc :
+Rappelez-vous que les couleurs peuvent être vues comme des vecteurs à 3 valeurs (r, g, b), la formule de la distance sera donc :
 
 ![Distance euclidienne en 3D](distance-euclidienne.png)
 
@@ -97,12 +97,20 @@ Cette méthode sera un peu plus complexe que les autres : vous allez devoir trou
 Pour cela, vous devrez donc :
 
 1. Parcourir la liste de couleurs connues
-2. Garder seulement les `this.k` éléments ayant la plus faible distance avec la couleur inconnue.
+2. Garder seulement les `this.k` éléments ayant la plus faible distance avec la couleur inconnue
+3. Faire un vote majoritaire des couleurs retenues
 
-Une fois votre liste de 
+### Bonus 1 : K plus proches voisins pondérés
 
-### Bonus : K plus proches voisins pondérés
+Si vous vous rendez ici en si peu de temps, on a potentiellement sous-estimé vos talents en programmation et en algorithmie...
 
+Essayez de modifier l'algorithme des K plus proches voisins pour tenir compte de la distance de chaque couleur lors du vote !
+
+### Bonus 2 : Votre propre variante
+
+Les K plus proches voisins et les K plus proches voisins pondérés donnent des résultats satisfaisants, mais il y a toujours place à l'amélioration !
+
+Sur le `HugeDataset`, vous remarquez que la performance des algorithmes implantés laisse plutôt à désirer... Essayez de les optimiser pour éviter de refaire en boucle les mêmes calculs.
 
 
 ## Ensembles de données
@@ -123,8 +131,8 @@ Vous remarquerez que le choix de l'ensemble de données change drastiquement les
 
 Pour choisir l'ensemble utilisé, changez la classe utilisée dans :
 
-<code><pre>
-// Fichier : AnyColourYouLike.java
+
+<pre><code>0 // Fichier : AnyColourYouLike.java
 1 package anycolouryoulike;
 2 
 3 public class AnyColorYouLike {
@@ -134,5 +142,5 @@ Pour choisir l'ensemble utilisé, changez la classe utilisée dans :
 7         Window w = new Window(new SimpleColorClassifier(<b><u>SimpleDataset</u></b>.colors(), 2));
 8     }
 9 }
-</pre></code>
+</code></pre>
 

@@ -1,0 +1,186 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Transitional //EN">
+<html>
+<head>
+  <meta charset="utf8">
+  <title>AnyColorYouLike</title>
+  <style>
+    body {
+        font-family: sans;
+        background-color: #EEE;
+        padding: 15px;
+    }
+
+    h2, h3 {
+        margin-top: 30px;
+    }
+
+    p {
+        margin-left: 15px;
+    }
+
+    pre, code {
+        font-size: large;
+        background-color: white;
+        padding: 3px;
+    }
+
+    pre > code {
+        background-color: transparent;
+        padding-left: 0;
+    }
+    </style>
+</head>
+<body>
+<h1>AnyColourYouLike</h1>
+
+<p><em><strong>TODO</strong></em> : Vous devez implanter un programme simple qui utilise l'apprentissage machine pour identifier des couleurs par leur nom.</p>
+
+<h2>Code fourni</h2>
+
+<p>Le code a plusieurs classes, celles auquelles vous allez toucher sont :</p>
+
+<ul>
+<li>AnyColourYouLike.java : main</li>
+<li>ColorLabel : Représentation d'une couleur (r: 0-255, g: 0-255, b: 0-255, name: nom donné à la couleur)</li>
+<li>ColorClassifier : Classe abstraite de classificateur
+
+<ul>
+<li>SimpleColorClassifier : Classificateur par la méthode de l'histogramme</li>
+<li>KNNColorClassifier : Classificateur par la méthode des K plus proches voisins</li>
+</ul>
+</li>
+</ul>
+
+
+<p>ColorClassifier définit les méthodes <code>add</code> et <code>colorName</code>, que vous devrez implanter.</p>
+
+<h2>Étapes du projet</h2>
+
+<h3>0. Familiarisation</h3>
+
+<p>Avant de commencer à coder, vous pouvez lancer le programme et vous familiariser avec l'interface. Le Color Picker permet de sélectionner une couleur et de voir son nom en temps réel.</p>
+
+<p>Pour l'instant, ça ne devrait afficher qu'un &ldquo;?&rdquo;, car les algorithmes n'ont pas été implantés&hellip;</p>
+
+<p>Notez le champ d'entrée sous le &ldquo;?&rdquo;, où vous pourrez ajouter des couleurs arbitraires à l'ensemble de couleurs connues.</p>
+
+<p>Prenez ensuite le temps de lire et de comprendre les classes mentionnées précédement.</p>
+
+<h3>1. Classification par histogramme</h3>
+
+<p>Le premier algorithme à implanter est celui de l'histogramme.</p>
+
+<p>Vous avez (au moins) deux méthodes à implanter dans la classe <code>SimpleColorClassifier</code> :</p>
+
+<h4>a) La méthode add</h4>
+
+<pre><code class="java">    public void add(int r, int g, int b, String name) { ... }
+</code></pre>
+
+<p>Cette méthode se chargera d'ajouter une couleur au <code>this.cube</code> dans la bonne section selon les valeurs r,g,b passées en paramètre.</p>
+
+<p>Notez que le nombre de sections est une variable, <code>this.sections</code> (un <code>int</code>).</p>
+
+<p>Notez également que <code>this.cube[x][y][z]</code> est un ArrayList de String. On peut donc faire <code>this.cube[x][y][z].add("Bonjour")</code> pour ajouter le nom &ldquo;Bonjour&rdquo; dans la section (x,y,z).</p>
+
+<h4>b) La méthode colorName</h4>
+
+<pre><code class="java">    public String colorName(int r, int g, int b) { ... }
+</code></pre>
+
+<p>Cette méthode se chargera de donner le nom d'une couleur selon ce qui se trouve dans la section du cube correspondant aux paramètres r, g et b.</p>
+
+<p><em>Indice</em> : Le code de classification dans une section donnée de (r, g, b) va se répéter entre <code>add</code> et <code>colorName</code>, ça peut être une bonne idée d'en faire une méthode de la classe.</p>
+
+<p>Vous pouvez utiliser la fonction <code>ColorClassifier.majorityVote(ArrayList&lt;String&gt; arr)</code> pour obtenir le résultat du vote majoritaire sur un ArrayList de noms de couleurs.</p>
+
+<p>Une fois que votre code fonctionne, vous pouvez le tester sur des plus gros ensembles de données que l'ensemble de base.
+<a href="#dataset">(Voir la section sur les ensembles de données)</a></p>
+
+<h3>2. Classification par les K plus proches voisins</h3>
+
+<p>Le deuxième algorithme à implanter est celui des K plus proches voisins (<em>K nearest neighbors</em>).</p>
+
+<p>Encore une fois, vous devrez implanter les deux mêmes méthodes pour la classe <code>KNNColorClassifier</code>, en plus d'une méthode de comparaison de deux couleurs qui sera utile :</p>
+
+<h4>a) La méthode add</h4>
+
+<p>Puisqu'on n'a plus à gérer un cube d'ArrayList, le code de cette fonction devrait être plus simple.</p>
+
+<p>La classe possède un ArrayList de ColorLabel, <code>this.colors</code>, où vous pouvez simplement stocker les couleurs.</p>
+
+<h4>b) La méthode de comparaison des couleurs</h4>
+
+<p>Cette méthode sera utile pour savoir quels sont les voisins les plus proches d'une couleur donnée.</p>
+
+<p>Vous trouverez dans la classe <code>ColorLabel</code> la fonction :</p>
+
+<pre><code class="java">    public int compareTo(ColorLabel other) { ... }
+</code></pre>
+
+<p>Qui devra retourner la distance Euclidienne entre deux couleurs.</p>
+
+<p>Rappelez-vous que les couleurs peuvent être vues comme des vecteurs à 3 valeurs (r, g, b), la formule de la distance sera donc :</p>
+
+<p><img src="distance-euclidienne.png" alt="Distance euclidienne en 3D" /></p>
+
+<h4>c) La méthode colorName</h4>
+
+<p>Cette méthode sera un peu plus complexe que les autres : vous allez devoir trouver les K plus proches voisins d'une couleur donnée.</p>
+
+<p>Pour cela, vous devrez donc :</p>
+
+<ol>
+<li>Parcourir la liste de couleurs connues</li>
+<li>Garder seulement les <code>this.k</code> éléments ayant la plus faible distance avec la couleur inconnue</li>
+<li>Faire un vote majoritaire des couleurs retenues</li>
+</ol>
+
+
+<h3>Bonus 1 : K plus proches voisins pondérés</h3>
+
+<p>Si vous vous rendez ici en si peu de temps, on a potentiellement sous-estimé vos talents en programmation et en algorithmie&hellip;</p>
+
+<p>Essayez de modifier l'algorithme des K plus proches voisins pour tenir compte de la distance de chaque couleur lors du vote !</p>
+
+<h3>Bonus 2 : Votre propre variante</h3>
+
+<p>Les K plus proches voisins et les K plus proches voisins pondérés donnent des résultats satisfaisants, mais il y a toujours place à l'amélioration !</p>
+
+<p>Sur le <code>HugeDataset</code>, vous remarquez que la performance des algorithmes implantés laisse plutôt à désirer&hellip; Essayez de les optimiser pour éviter de refaire en boucle les mêmes calculs.</p>
+
+<h2>Ensembles de données</h2>
+
+<p><span id="dataset"></span></p>
+
+<p>On dispose de trois ensembles de données pour tester les algorithmes :</p>
+
+<ul>
+<li>SimpleDataset : un ensemble ayant seulement 5 données : Rouge, Vert, Bleu, Blanc et Noir</li>
+<li>BigDataset : Un échantillon de 2700 données d'un ensemble de réponses à un sondage fait sur Internet</li>
+<li>HugeDataset : L'ensemble des données (> 3 millions) du sondage mentionné ci-haut</li>
+</ul>
+
+
+<p><small>Référence du sondage : <a href="http://blog.xkcd.com/2010/05/03/color-survey-results/">http://blog.xkcd.com/2010/05/03/color-survey-results/</a></small></p>
+
+<p>Vous remarquerez que le choix de l'ensemble de données change drastiquement les résultats ainsi que la vitesse du programme.</p>
+
+<p>Pour choisir l'ensemble utilisé, changez la classe utilisée dans :</p>
+
+<pre><code>0 // Fichier : AnyColourYouLike.java
+1 package anycolouryoulike;
+2 
+3 public class AnyColorYouLike {
+4 
+5     public static void main(String[] args) {
+6
+7         Window w = new Window(new SimpleColorClassifier(<b><u>SimpleDataset</u></b>.colors(), 2));
+8     }
+9 }
+</code></pre>
+
+
+
+</body>
+</html>

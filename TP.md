@@ -90,6 +90,8 @@ Rappelez-vous que les couleurs peuvent être vues comme des vecteurs à 3 valeur
 
 ![Distance euclidienne en 3D](distance-euclidienne.png)
 
+Une fois que vous aurez implémenté cette fonction, la méthode `Arrays.sort([array list de ColorLabel])` pourra être utilisée pour trier un ArrayList donné.
+
 #### c) La méthode colorName
 
 Cette méthode sera un peu plus complexe que les autres : vous allez devoir trouver les K plus proches voisins d'une couleur donnée.
@@ -112,8 +114,36 @@ Les K plus proches voisins et les K plus proches voisins pondérés donnent des 
 
 Sur le `HugeDataset`, vous remarquez que la performance des algorithmes implantés laisse plutôt à désirer... Essayez de les optimiser pour éviter de refaire en boucle les mêmes calculs.
 
+## Annexes
 
-## Ensembles de données
+### Représentation des couleurs
+
+Une couleur est souvent représentée en informatique avec un triplet de `unsigned char` (trois nombres de 0 à 255).
+
+Les nombres représentent respectivement la quantité de *rouge*, de *vert* et de *bleu*. `(r, g, b) => (red, green, blue)`
+
+Les couleurs vont donc de `(0, 0, 0)` (noir) à `(255, 255, 255)` (blanc).
+
+### ArrayLists
+
+En Java, les tableaux sont peu pratiques lorsque vient le temps de manipuler des nombres indéfinis de données. Les `ArrayLists` sont plus pratiques de ce côté :
+
+```
+// Création d'un ArrayList pouvant contenir des ColorLabels
+ArrayList<ColorLabel> colors = new ArrayList<>();
+
+// Ajout à l'ArrayList
+colors.add(new ColorLabel(0, 0, 0, "noir"));
+colors.add(new ColorLabel(255, 255, 255, "blanc"));
+
+// On peut itérer sur les éléments d'un ArrayList comme sur un tableau :
+for(ColorLabel color : colors) {
+    System.out.println(color.name);
+}
+```
+
+
+### Ensembles de données
 
 <span id="dataset"></span>
 
@@ -132,15 +162,15 @@ Vous remarquerez que le choix de l'ensemble de données change drastiquement les
 Pour choisir l'ensemble utilisé, changez la classe utilisée dans :
 
 
-<pre><code>0 // Fichier : AnyColourYouLike.java
-1 package anycolouryoulike;
-2 
-3 public class AnyColorYouLike {
-4 
-5     public static void main(String[] args) {
-6
-7         Window w = new Window(new SimpleColorClassifier(<b><u>SimpleDataset</u></b>.colors(), 2));
-8     }
-9 }
+<pre><code>// Fichier : AnyColourYouLike.java
+package anycolouryoulike;
+
+public class AnyColorYouLike {
+
+    public static void main(String[] args) {
+        Window w = new Window(new SimpleColorClassifier(<b><u>SimpleDataset</u></b>.colors(), 2));
+    }
+
+}
 </code></pre>
 

@@ -8,6 +8,7 @@
         font-family: sans;
         background-color: #EEE;
         padding: 15px;
+        padding-top: 0;
     }
 
     h2, h3 {
@@ -124,6 +125,8 @@
 
 <p><img src="distance-euclidienne.png" alt="Distance euclidienne en 3D" /></p>
 
+<p>Une fois que vous aurez implémenté cette fonction, la méthode <code>Arrays.sort([array list de ColorLabel])</code> pourra être utilisée pour trier un ArrayList donné.</p>
+
 <h4>c) La méthode colorName</h4>
 
 <p>Cette méthode sera un peu plus complexe que les autres : vous allez devoir trouver les K plus proches voisins d'une couleur donnée.</p>
@@ -149,7 +152,34 @@
 
 <p>Sur le <code>HugeDataset</code>, vous remarquez que la performance des algorithmes implantés laisse plutôt à désirer&hellip; Essayez de les optimiser pour éviter de refaire en boucle les mêmes calculs.</p>
 
-<h2>Ensembles de données</h2>
+<h2>Annexes</h2>
+
+<h3>Représentation des couleurs</h3>
+
+<p>Une couleur est souvent représentée en informatique avec un triplet de <code>unsigned char</code> (trois nombres de 0 à 255).</p>
+
+<p>Les nombres représentent respectivement la quantité de <em>rouge</em>, de <em>vert</em> et de <em>bleu</em>. <code>(r, g, b) =&gt; (red, green, blue)</code></p>
+
+<p>Les couleurs vont donc de <code>(0, 0, 0)</code> (noir) à <code>(255, 255, 255)</code> (blanc).</p>
+
+<h3>ArrayLists</h3>
+
+<p>En Java, les tableaux sont peu pratiques lorsque vient le temps de manipuler des nombres indéfinis de données. Les <code>ArrayLists</code> sont plus pratiques de ce côté :</p>
+
+<pre><code>// Création d'un ArrayList pouvant contenir des ColorLabels
+ArrayList&lt;ColorLabel&gt; colors = new ArrayList&lt;&gt;();
+
+// Ajout à l'ArrayList
+colors.add(new ColorLabel(0, 0, 0, "noir"));
+colors.add(new ColorLabel(255, 255, 255, "blanc"));
+
+// On peut itérer sur les éléments d'un ArrayList comme sur un tableau :
+for(ColorLabel color : colors) {
+    System.out.println(color.name);
+}
+</code></pre>
+
+<h3>Ensembles de données</h3>
 
 <p><span id="dataset"></span></p>
 
@@ -168,16 +198,16 @@
 
 <p>Pour choisir l'ensemble utilisé, changez la classe utilisée dans :</p>
 
-<pre><code>0 // Fichier : AnyColourYouLike.java
-1 package anycolouryoulike;
-2 
-3 public class AnyColorYouLike {
-4 
-5     public static void main(String[] args) {
-6
-7         Window w = new Window(new SimpleColorClassifier(<b><u>SimpleDataset</u></b>.colors(), 2));
-8     }
-9 }
+<pre><code>// Fichier : AnyColourYouLike.java
+package anycolouryoulike;
+
+public class AnyColorYouLike {
+
+    public static void main(String[] args) {
+        Window w = new Window(new SimpleColorClassifier(<b><u>SimpleDataset</u></b>.colors(), 2));
+    }
+
+}
 </code></pre>
 
 

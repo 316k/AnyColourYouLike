@@ -166,15 +166,14 @@ Champ d'étude de l'intelligence artificielle visant à apprendre à partir d'ex
 
 \item Ex. : Une ligne peut servir à classifier un ensemble en 2 sections. 
 
-	f(x): ax + b
+	$$f(x): ax + b$$
 
 Par exemple, nous avons la position et l'équipe des joueurs sur un terrain de ballon-chasseur. Nous cherchons à estimer la position de la ligne du milieu du terrain en fonction des joueurs.
+\begin{center}
+\includegraphics[scale=0.2]{ballon-chasseur.png}
+\end{center}
 
 \end{itemize}
-
-\begin{center}
-Mettre image ici
-\end{center}
 
 \end{frame}
 
@@ -203,38 +202,29 @@ etc..& &
 \frametitle{Problème général : classifier une donnée selon ses
 caractéristiques}
 
-SUGGESTIONS D<EXEMPLE ALTERNATIF : Nombre d'heures de sommeils | Nombre d'heures de travail | Nombre d'heures passer Ã  faire la fÃªte | Occupation 
-
 \begin{center}
-\begin{tabular}{rcrc}
-& Alcool & Pourcentage & Type\\
-1 & Bière blonde & 5\% & Faible
-\\
-2 & Bière brune & 9\% & Faible
-\\
-3 & Vin & 12\% & Faible
-\\
-4 & Vodka & 40\% & Fort
-\\
-5 & Gin & 47\% & Fort
-\\
-6 & Rhum & 55\% & Fort
-\\
-7 & \emph{Curaçao Bleu} & 25\% & ?
-\\
-8 & \emph{Whisky} & 72\% & ?
-\\
-\end{tabular}
+\includegraphics[scale=0.25]{10.png}
 \end{center}
 
-\begin{center}\rule{3in}{0.4pt}\end{center}
 \end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Classifier une donnée selon ses
+caractéristiques}
+
+\begin{center}
+\includegraphics[scale=0.3]{11.png}
+\end{center}
+
+\end{frame}
+
+
 
 \begin{frame}
 \frametitle{Qu'est-ce qu'on fait ici?}
 
 \begin{itemize}
-\item Nous allons vous montrer deux techniques de modèle non-paramétrés (non-paramétrés : les techniques n'apprennent pas Ã  proprement parler de paramètres, elles ne font que garder en mémoire tous les exemples et calcule une réponse directement en fonction de ceux-ci)
+\item Nous allons vous montrer deux techniques de modèle non-paramétrés (non-paramétrés : les techniques n'apprennent pas à proprement parler de paramètres, elles ne font que garder en mémoire tous les exemples et calculent une réponse directement en fonction de ceux-ci)
 \item Nous allons ici tenter de classifier des couleurs en fonction de millions de données récoltés par sondage internet. 
 \end{itemize}
 
@@ -264,96 +254,45 @@ sa valeur \texttt{rgb}
 
 \begin{frame}
 \frametitle{Données : xkcd's color dataset}
-L'auteur du webcomic XKCD a récolté plus de 3 millions d'échantillons de couleur étiquetée par des utilisateurs du web
 
-Comme on peut s'y attendre, une certaine proportion des données est aberrante (lire *troll*).
+\begin{itemize}
+\item L'auteur du webcomic XKCD a récolté plus de 3 millions d'échantillons de couleur étiquetée par des utilisateurs du web
+
+\item Comme on peut s'y attendre, une certaine proportion des données est aberrante (lire *troll*).
+
+\item Chaque exemple est stocké sous forme de paires (rgb, étiquettes).
+\end{itemize}
 
 \end{frame}
 
 
 \begin{frame}[fragile]
-\frametitle{Approche de l'histogramme : Séparer en catégories et trouver la tendance dans chaque catégorie}
+\frametitle{Approche : Séparer en sections et trouver la tendance}
 
-{Séparer en 5 sur l'échelle de 0 à
-100}
+Technique de l'histogramme :
+\begin{itemize}
+\item Prendre l'espace d'entrée et le découper en sections de taille équivalente. 
 
-\begin{verbatim}
-     123    7?  4  56    8?
-    *-------^------------^--------*
-    0                             100
+\begin{center}
+\includegraphics[scale=0.25]{RGB-color-space.jpg}
+\end{center}
+		
+\item Calculer la classe majoritaire des exemples dans chaque section et assigner sa valeur à la section.
 
-       A     B     C     D     E
-    *-----*-----*-----*-----*-----*
-    0     20    40    60    80    100
-\end{verbatim}
 
-{Catégories}
+\end{itemize}
 
-\begin{verbatim}
-A: Faible ; B: Fort ; C: Fort ; D: (vide) ; E: (vide)
-7 est donc Fort, 8 est ?
-\end{verbatim}
-\begin{center}\rule{3in}{0.4pt}\end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Approche : Séparer en catégories et trouver la tendance dans
-chaque
-catégorie}
-
-{Séparer en 3 sur l'échelle de 0 à
-100}
-
-\begin{verbatim}
-     123    7   4  56    8 
-    *-------^------------^--------*
-    0                            100
-    
-        A          B         C
-    *--------*----------*---------*
-    0     20    40    60    80    100
-\end{verbatim}
-\begin{center}\rule{3in}{0.4pt}\end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Approche : Séparer en catégories et trouver la tendance dans
-chaque
-catégorie}
-
-{Séparer en 3 sur l'échelle de 0 à
-100}
-
-\begin{verbatim}
-     123    7   4  56    8 
-    *-------^------------^--------*
-    0                            100
-    
-        A          B         C
-    *--------*----------*---------*
-    0     20    40    60    80    100
-\end{verbatim}
-
-{Catégories}
-
-\begin{verbatim}
-A: Faible ; B: Fort ; C: Aucune donnée
-7 est donc faible, 8 est ?
-\end{verbatim}
-\begin{center}\rule{3in}{0.4pt}\end{center}
 \end{frame}
 
 \begin{frame}
-\frametitle{Approche : Séparer en catégories et trouver la tendance dans
-chaque
-catégorie}
+\frametitle{Approche : Séparer en sections et trouver la tendance}
 
 {Avantages}
 
 \begin{itemize}
 \itemsep1pt\parskip0pt\parsep0pt
 \item
-  Très simple, semble suffisant dans certains cas
+  Très simple, semble suffisant dans certains cas.
 \end{itemize}
 
 {Problèmes}
@@ -379,14 +318,23 @@ catégorie}
     Trop de catégories risque de donner beaucoup de cas où on ne sait
     pas répondre
   \end{itemize}
+  \item La méthode est complètement inadaptée pour certaines tâches.
+  \begin{itemize}
+	\item La prochaine méthode est beaucoup plus versatile et généralement plus efficace.  
+  
+  \end{itemize}  	
+	
 \end{itemize}
-\begin{center}\rule{3in}{0.4pt}\end{center}
 \end{frame}
 
 \begin{frame}
 \frametitle{Autre approche : Les $k$ plus proches voisins}
 Trouver les $k$ éléments les plus "proches" à ce qu'on cherche à identifier et déduire une catégorie en fonction de ces éléments (et potentiellement de leur distance)
-\includegraphics{KnnClassification.png}\{ width=30\% \}
+\begin{center}
+\includegraphics[scale=0.4]{KnnClassification.png}
+\end{center}
+
+Les voisins : $((x_1,y_1),(x_2,y_2),...,(x_k,y_k))$ (x la position, y la couleur)
 \end{frame}
 
 \begin{frame}
@@ -402,8 +350,6 @@ $$ d(a,b) = \sqrt{(a_1-b_1)^2+(a_2-b_2)^2+(a_3-b_3)^2}$$
 \item{Nécessite une fonction de score. La catégorie choisie sera celle avec le plus haut score.}
 \end{itemize}
 
-Les voisins : $((x_1,y_1),(x_2,y_2),...,(x_k,y_k))$ (x la position, y la couleur)
-
 \end{frame}
 
 \begin{frame}
@@ -413,37 +359,67 @@ Plusieurs variantes existent :
 \item{Vote majoritaire des k plus proches voisins}\\
 Score(Couleur) = Compte des couleurs de cette catégorie
 
-\item{Vote pondéré des k plus proches voisins}\\
-Score(Couleur,position) = Sommes de $\frac{1}{dist(x_i,p)}$ pour tous les $x_i$ tel que $y_i$ est la couleur demandée
+\item{Vote pondéré de tous les points dans l'ensemble}\\
+
+Score(Couleur, position) = Sommes de $\frac{1}{dist(x_i,p)}$ pour tous les $x_i$ tel que $y_i$ est la couleur demandée
 
 $$\text{score}(c, p) = \sum_{i=1}^k I_{c=y_i} \cdot \frac{1}{d_(x_i,p)}$$
+\item{Vote pondéré des k plus proches voisins}\\
+
 
 \item{Votre propre variante}\\
-Inventez vos propres contraintes (e.g. une couleur doit être au moins présente 2 fois dans les $k$ plus proches voisin pour pouvoir voter)
 
 \end{itemize}
 
 \end{frame}
 
 \begin{frame}
+\frametitle{Exemple de résultats}
+\begin{itemize}
+\item 1 plus proche voisins, vote majoritaire :
+\begin{center}
+\includegraphics[scale=0.3]{Map1NN.png}
+\end{center}
+
+\item 5 plus proche voisins, vote majoritaire :
+\begin{center}
+\includegraphics[scale=0.3]{Map5NN.png}
+\end{center}
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}
 \frametitle{Contrôle de la capacité}
-Vous vous rappelez des hyper-paramètres? Ceux-ci contrôlent leur capacité à apprendre. 
+Vous vous rappelez des hyper-paramètres? Ceux-ci contrôlent la capacité des modèles à apprendre. 
 
 \begin{itemize}
 \item Histogramme : le nombre de séparations dans chaque dimension
 \item KNN : le nombre de voisins
 \end{itemize}
 
-Mal ajustés, ils peuvent causer des réponses erronées.
-
-\begin{tabular}{lll}
-Sur-apprentissage : & sous-apprentissage & bien ajusté\\
-\includegraphics[scale=100]{mettreoverfittingici}
-&\includegraphics[scale=100]{mettreunderfittingici}
-&\includegraphics[scale=100]{mettreokfittingici}\\
-\end{tabular}
+Mal ajustés, ils peuvent causer des réponses erronées et des aberations. Trop apprendre peut être aussi dommageable que pas assez.
 \end{frame}
 
+\begin{frame}
+\frametitle{Questions}
+
+\begin{center}
+Des questions?
+\end{center}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Fin}
+
+\begin{center}
+Merci!
+\end{center}
+
+\end{frame}
 
 
 \end{document}
